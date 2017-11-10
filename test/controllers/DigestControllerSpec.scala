@@ -1,7 +1,5 @@
 package controllers
 
-import controllers.json.DigestJsonSupport
-import domain.Digest
 import org.joda.time.DateTime
 import org.mockito.Mockito._
 import org.scalatest.mockito.MockitoSugar
@@ -35,7 +33,11 @@ class DigestControllerSpec extends PlaySpec with MockitoSugar with GuiceOneAppPe
       val f = fixture
       val currentDate = DateTime.now()
       val digestID = "123123"
-      val digest = Digest(None, "title", currentDate, currentDate, "contribute", "company name", Seq())
+      val digest = Json.obj(
+        "title" -> "title",
+        "contribute" -> "contribute",
+        "company name" -> "company name"
+      )
 
       when(f.digestServiceMock.findById(digestID)).thenReturn(Future(Some(digest)))
 
@@ -44,7 +46,7 @@ class DigestControllerSpec extends PlaySpec with MockitoSugar with GuiceOneAppPe
 
       status(result) mustBe OK
       contentType(result) mustBe Some(JSON)
-      contentAsJson(result) mustBe Json.toJson(digest)(DigestJsonSupport.digestWrites)
+      contentAsJson(result) mustBe digest
 
       verify(f.digestServiceMock).findById(digestID)
     }

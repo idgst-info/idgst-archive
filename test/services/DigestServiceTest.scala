@@ -1,11 +1,11 @@
 package services
 
-import domain.Digest
 import org.joda.time.DateTime
 import org.mockito.Mockito._
 import org.scalatest.BeforeAndAfterEach
 import org.scalatest.mockito.MockitoSugar
 import org.scalatestplus.play.PlaySpec
+import play.api.libs.json.Json
 import repositories.DigestRepository
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -31,7 +31,7 @@ class DigestServiceTest extends PlaySpec with BeforeAndAfterEach with MockitoSug
       val f = fixture
 
       when(f.digestRepository.findById(digestID))
-        .thenReturn(Future(Some(Digest(None, "title", currentDate, currentDate, "contribute", "company name", Seq()))))
+        .thenReturn(Future(Some(Json.obj("title" -> "title", "contribute" -> "contribute", "company name" -> "company name"))))
 
       // Run
       val result = Await.result(f.digestService.findById(digestID), 1.seconds)
