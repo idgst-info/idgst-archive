@@ -2,8 +2,9 @@ package repositories
 
 import domain.PageRequest
 import domain.SortingCriteria.{SortedBy, UnSorted}
-import play.api.libs.json.{JsArray, JsObject, Json}
+import play.api.libs.json._
 import reactivemongo.api.{QueryOpts, ReadPreference}
+import reactivemongo.bson.BSONDocument
 import reactivemongo.play.json._
 import reactivemongo.play.json.collection.JSONCollection
 import reactivemongo.play.json.collection.JsCursor._
@@ -30,7 +31,8 @@ trait PagingAndSorting {
     * @param pageRequest [[PageRequest]] restrictions for pagination
     * @return a page of entities
     */
-  def findAll(pageRequest: PageRequest) = {
+  def findAll(pageRequest: PageRequest, projection: BSONDocument) = {
+
     type ResultType = JsObject
     val searchQuery = Json.obj()
 
@@ -43,6 +45,7 @@ trait PagingAndSorting {
     val content = collection.find(searchQuery)
       .options(queryOptions)
       .sort(sortingQuery)
+      .projection(projection)
       .cursor[ResultType](ReadPreference.primary).jsArray(queryOptions.batchSizeN)
 
     createPage(content, pageRequest)
