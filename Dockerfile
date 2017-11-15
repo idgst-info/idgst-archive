@@ -7,5 +7,6 @@ COPY ./target/universal/idgst*.zip $PROJECT_HOME
 
 WORKDIR $PROJECT_HOME
 
-RUN unzip $PROJECT_HOME/idgst*.zip -d idgst
+RUN unzip $PROJECT_HOME/idgst*.zip
 RUN rm $PROJECT_HOME/idgst*.zip
+RUN mv idgst* idgst
