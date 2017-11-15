@@ -5,6 +5,7 @@ import javax.inject.Inject
 import domain._
 import play.api.libs.json.{JsObject, _}
 import play.modules.reactivemongo.ReactiveMongoApi
+import reactivemongo.bson.BSONDocument
 import reactivemongo.play.json._
 import reactivemongo.play.json.collection.JSONCollection
 
@@ -46,6 +47,6 @@ class DigestRepository @Inject()(reactiveMongoApi: ReactiveMongoApi)
     * @return [[Future]] digests devided by pages according to the provided page request
     */
   def findWithPagination(pageRequest: PageRequest): Future[JsObject] = {
-    findAll(pageRequest)
+    findAll(pageRequest, BSONDocument("topics" -> 0))
   }
 }
