@@ -64,6 +64,7 @@ trait PagingAndSorting {
     val futureCount = collection.count()
     val pageNumber = pageRequest.pageNumber
     val pageSize = pageRequest.pageSize
+    val firstPage = 1
 
     for {
       content <- contentFuture
@@ -73,9 +74,9 @@ trait PagingAndSorting {
       val totalElements = totalDocs
       val last = pageNumber == totalPages
       val size = pageSize
-      val number = pageNumber - 1
+      val number = pageNumber
       val numberOfElements = pageSize
-      val first = !last
+      val first = pageNumber == firstPage
 
       Json.obj(
         "totalPages" -> totalPages,
