@@ -1,20 +1,19 @@
 Below you will find some information on how to build and run the application
 
-## Table of Contents
+# Table of Contents
 
 <!-- TOC -->
 
 - [Table of Contents](#table-of-contents)
-- [About](#about)
-- [How to run into development mode](#how-to-run-into-development-mode)
-- [How to build for production](#how-to-build-for-production)
+    - [About](#about)
+    - [How to run into development mode](#how-to-run-into-development-mode)
+    - [How to build for production](#how-to-build-for-production)
 
 <!-- /TOC -->
 
 ## About
 
 This Rest API for [idgst.info](http://idgst.info) writen in Scala Play Framework.
-
 
 Main git repository is hosted on [Gitlab](https://gitlab.com/idgst/idgst-archive).
 The mirror repository is hosted on [Github](https://github.com/idgst/idgst-rest-api)
@@ -25,7 +24,7 @@ The mirror repository is hosted on [Github](https://github.com/idgst/idgst-rest-
 sbt run
 ```
 
-After that REST APU is available on http://localhost:9000
+After that REST API is available on http://localhost:9000
 
 ## How to build for production
 
