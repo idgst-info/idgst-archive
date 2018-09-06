@@ -44,7 +44,7 @@ Commdands bellow assume that MongoDB is running on port `27018`
 To backup data run the following 
 
 ```bash
-mongodump --out /data/backup/mongo
+mongodump --out /data/backup/mongo --port 27018
 ```
 
 To restore backup run the following
